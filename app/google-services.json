@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "526252162278",
+    "firebase_url": "https://visitors-management-aec0e.firebaseio.com",
+    "project_id": "visitors-management-aec0e",
+    "storage_bucket": "visitors-management-aec0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526252162278:android:3e91048cbb9ed8717f4f27",
+        "android_client_info": {
+          "package_name": "com.andolasoft.visitorsmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526252162278-6d4oia3uesf08gktlrmjlp7op9g2sjfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo6_oNaw3ue0hO4YcTmkqwHoPnjxrH43c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526252162278-6d4oia3uesf08gktlrmjlp7op9g2sjfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
