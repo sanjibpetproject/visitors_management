@@ -437,7 +437,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/sign_in_button"
                     android:layout_marginRight="15dp"
-                    android:theme="@style/Color1SwitchStyle"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
             <RelativeLayout
