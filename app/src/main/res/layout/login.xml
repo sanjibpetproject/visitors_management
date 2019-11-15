@@ -123,16 +123,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/os_text" />
 
-        <com.hanks.htextview.HTextView
-            android:id="@+id/tagline"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="#1 Task Management Software"
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -417,27 +407,7 @@
                      android:textStyle="bold"
                      android:visibility="invisible"/>-->
 
-                <TextView
-                    android:id="@+id/usertype_selected_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sign_in_button"
-                    android:layout_marginRight="5dp"
-                    android:textColor="@color/bg_color"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    android:layout_toLeftOf="@+id/usertype_switch"
-                    android:text="Switch User" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/usertype_switch"
-                    android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sign_in_button"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/signup_layout"
@@ -446,6 +416,7 @@
                 android:layout_below="@+id/signin_layout_button"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 >
 
                 <TextView
