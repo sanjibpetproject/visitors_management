@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/main_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BaseActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.LuncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

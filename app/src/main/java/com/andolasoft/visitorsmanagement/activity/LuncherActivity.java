@@ -21,7 +21,7 @@ public class LuncherActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent = new Intent(LuncherActivity.this,BaseActivity.class);
+                Intent intent = new Intent(LuncherActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

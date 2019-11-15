@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.andolasoft.visitorsmanagement.R;
 
-public class BaseActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        setContentView(R.layout.login);
     }
 }
