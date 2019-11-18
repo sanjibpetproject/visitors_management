@@ -192,7 +192,7 @@
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/home_green" />
 
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/user__grey" />
 
                     <TextView
                         android:id="@+id/profile_txt"
@@ -252,7 +252,7 @@
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/notification_grey" />
 
                     <TextView
                         android:id="@+id/notification_txt"
@@ -279,7 +279,7 @@
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/settings_grey" />
 
                     <TextView
                         android:id="@+id/order_txt"
