@@ -69,7 +69,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/os_logo_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tagline">
+            >
 
             <!--  <TextView
                       android:id="@+id/tagline"
@@ -250,7 +250,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginStart="16dp"
-                        android:buttonTint="#B1BCBE"
+                        android:buttonTint="@color/colorPrimary"
+                        android:layout_marginTop="12dp"
                         android:text=""
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -262,7 +263,7 @@
                         android:layout_toRightOf="@+id/password_checkbox"
                         android:text="Show Password"
                         android:textColor="#828282"
-                        android:textSize="13dp"
+                        android:textSize="14dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/password_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/password_checkbox"
@@ -277,7 +278,7 @@
                         android:layout_centerVertical="true"
                         android:background="@drawable/rounded_button"
                         android:text="Log In"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="25dp"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="16dp"
@@ -293,8 +294,8 @@
                         android:gravity="center"
                         android:text="Forgot Password?"
                         android:textColor="#4F93E9"
-                        android:textSize="11dp"
-                        android:layout_marginTop="12dp"
+                        android:textSize="16dp"
+                        android:layout_marginTop="16dp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/signin_button"
                         app:layout_constraintStart_toStartOf="@+id/signin_button"
@@ -364,7 +365,7 @@
                     android:background="@drawable/rounded_button"
                     android:text="Sign Up"
                     android:layout_marginBottom="50dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"

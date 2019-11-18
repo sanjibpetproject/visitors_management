@@ -119,9 +119,9 @@ public class Register extends AppCompatActivity {
         contentValues.put("Email",email.getText().toString());
         contentValues.put("Password",password.getText().toString());
         if (employee.isChecked()){
-            contentValues.put("Type","1");
+            contentValues.put("Type","Employee");
         }else {
-            contentValues.put("Type","2");
+            contentValues.put("Type","Security");
         }
        contentValues.put("status","");
         contentValues.put("image","");
