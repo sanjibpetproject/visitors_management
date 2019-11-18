@@ -49,25 +49,29 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
+                        android:id="@+id/text_name"
                         android:text="Name : Sanjib Kumar Sahoo"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
+                        android:id="@+id/text_visitee"
                         android:text="To Visit : Anurag Pattnaik"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
+                        android:id="@+id/text_reason"
                         android:text="Reason : Interview"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
-                        android:text="Time : 15th Nov 2019"/>
+                        android:id="@+id/text_time"
+                        android:text="time : Not Added"/>
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,9 +32,14 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder companyViewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
 
-        companyViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        viewHolder.text_name.setText("Name : "+"Sanjib Kumar Sahoo");
+        viewHolder.text_visitee.setText("To Visit : "+"Anurag Pattnaik");
+        viewHolder.text_reason.setText("Reason : "+"Interview");
+        viewHolder.text_time.setText("time : "+"Not Added");
+
+        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 show_pisker();
@@ -49,11 +55,16 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout relativeLayout;
+        TextView text_name,text_visitee,text_reason,text_time;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             relativeLayout = itemView.findViewById(R.id.rel_main);
+            text_name = itemView.findViewById(R.id.text_name);
+            text_visitee = itemView.findViewById(R.id.text_visitee);
+            text_reason = itemView.findViewById(R.id.text_reason);
+            text_time = itemView.findViewById(R.id.text_time);
         }
 
     }
@@ -63,7 +74,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
         MyOptionsPickerView threePicker = new MyOptionsPickerView(context);
         final ArrayList<String> threeItemsOptions1 = new ArrayList<String>();
 
-        for(int i=0;i<=12;i++){
+        for(int i=1;i<=12;i++){
 
             if(i<10){
                 threeItemsOptions1.add("0"+Integer.toString(i));
