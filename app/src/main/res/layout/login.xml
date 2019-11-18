@@ -176,7 +176,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_toRightOf="@+id/user_email_icon"
                         android:background="@null"
-                        android:hint="Username or Email"
+                        android:hint=" Email"
                         android:inputType="textEmailAddress"
                         android:textColorHint="#b6c6e4"
                         android:textCursorDrawable="@null"
@@ -206,7 +206,7 @@
                     <EditText
                         android:id="@+id/user_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginTop="5dp"
@@ -357,6 +357,7 @@
 
                 <Button
                     android:layout_width="210dp"
+                    android:id="@+id/signup"
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"

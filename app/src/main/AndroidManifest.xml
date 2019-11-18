@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andolasoft.visitorsmanagement">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/main_icon"
@@ -9,7 +10,10 @@
         android:roundIcon="@mipmap/main_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BaseActivity"></activity>
+        <activity android:name=".activity.Register">
+
+        </activity>
+        <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.LuncherActivity">
             <intent-filter>
