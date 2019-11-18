@@ -146,6 +146,7 @@
             android:layout_height="62dp"
             android:layout_alignParentEnd="true"
             android:padding="5dp"
+            android:id="@+id/create_meeting"
             android:src="@mipmap/plus"/>
 
     </RelativeLayout>

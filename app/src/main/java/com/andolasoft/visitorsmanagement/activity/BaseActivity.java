@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andolasoft.visitorsmanagement.R;
@@ -16,6 +18,7 @@ public class BaseActivity extends AppCompatActivity {
     TextView text_pending,text_progress,text_completed;
     View view_progress,view_pending,view_completed;
     DataBaseHandler dataBaseHandler;
+    ImageView create_meeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class BaseActivity extends AppCompatActivity {
         view_pending = findViewById(R.id.view_pending);
         view_progress = findViewById(R.id.view_progress);
         view_completed = findViewById(R.id.view_completed);
+        create_meeting = findViewById(R.id.create_meeting);
     }
 
     private void click_function(){
@@ -63,6 +67,13 @@ public class BaseActivity extends AppCompatActivity {
                 setbar(text_completed,view_completed);
                 getdata("completed");
 
+            }
+        });
+        create_meeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BaseActivity.this,VisitorDetails.class);
+                startActivity(intent);
             }
         });
     }
