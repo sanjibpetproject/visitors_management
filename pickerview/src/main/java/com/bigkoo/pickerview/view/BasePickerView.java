@@ -24,7 +24,7 @@ import com.bigkoo.pickerview.listener.OnDismissListener;
  */
 public abstract class BasePickerView {
     private final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-          500, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER
+          600, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER
     );
 
     private Context context;

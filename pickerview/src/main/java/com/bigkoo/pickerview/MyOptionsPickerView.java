@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class MyOptionsPickerView<T> extends BasePickerView implements View.OnClickListener {
     MyWheelOptions wheelOptions;
-    private TextView tvTitle;
+    private TextView tvTitle,text_tile;
     private OnOptionsSelectListener optionsSelectListener;
     private static final String TAG_SUBMIT = "submit";
     private static final String TAG_CANCEL = "cancel";
@@ -37,6 +37,7 @@ public class MyOptionsPickerView<T> extends BasePickerView implements View.OnCli
         getBtnCancel().setOnClickListener(this);
         //顶部标题
         tvTitle = (TextView) findViewById(R.id.tvTitle);
+        text_tile = (TextView) findViewById(R.id.text_tile);
         // ----转轮
         final View optionspicker = findViewById(R.id.optionspicker);
         wheelOptions = new MyWheelOptions(optionspicker);
@@ -164,7 +165,7 @@ public class MyOptionsPickerView<T> extends BasePickerView implements View.OnCli
     }
 
     public void setTitle(String title) {
-        tvTitle.setText(title);
+        text_tile.setText(title);
     }
     public void setTitleTextSize(float textSize) {
         tvTitle.setTextSize(textSize);
