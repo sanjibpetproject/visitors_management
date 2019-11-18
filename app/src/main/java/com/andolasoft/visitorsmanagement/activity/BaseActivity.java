@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.andolasoft.visitorsmanagement.R;
 
+import java.util.ArrayList;
+
 public class BaseActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -19,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     View view_progress,view_pending,view_completed;
     DataBaseHandler dataBaseHandler;
     ImageView create_meeting;
+    ArrayList adapter_list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class BaseActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        HomeListApater adapter = new HomeListApater(BaseActivity.this);
+        HomeListApater adapter = new HomeListApater(BaseActivity.this,adapter_list);
         recyclerView.setAdapter(adapter);
     }
 
@@ -105,16 +108,16 @@ public class BaseActivity extends AppCompatActivity {
 
         if(status.equalsIgnoreCase(CommonUtilties.InProgress)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
         }else if(status.equalsIgnoreCase(CommonUtilties.Pending)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
 
         }else if(status.equalsIgnoreCase(CommonUtilties.Completed)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
 
 
