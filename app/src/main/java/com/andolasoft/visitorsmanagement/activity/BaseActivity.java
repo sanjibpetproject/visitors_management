@@ -15,6 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView text_pending,text_progress,text_completed;
     View view_progress,view_pending,view_completed;
+    DataBaseHandler dataBaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +24,13 @@ public class BaseActivity extends AppCompatActivity {
 
         init();
         click_function();
-        setdata();
+        text_pending.performClick();
 
     }
 
     private void init(){
 
+        dataBaseHandler = new DataBaseHandler(BaseActivity.this);
         text_progress = findViewById(R.id.text_progress);
         text_pending = findViewById(R.id.text_pending);
         text_completed = findViewById(R.id.text_completed);
@@ -44,12 +46,14 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 setbar(text_progress,view_progress);
+                getdata("progress");
             }
         });
         text_pending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setbar(text_pending,view_pending);
+                getdata("pending");
 
             }
         });
@@ -57,6 +61,7 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setbar(text_completed,view_completed);
+                getdata("completed");
 
             }
         });
@@ -83,5 +88,25 @@ public class BaseActivity extends AppCompatActivity {
 
         textView.setTextColor(getResources().getColor(R.color.white));
         view.setVisibility(View.VISIBLE);
+    }
+
+    private void getdata(String status){
+
+        if(status.equalsIgnoreCase("progess")){
+
+            dataBaseHandler.get_meeting_list(status);
+            setdata();
+        }else if(status.equalsIgnoreCase("pending")){
+
+            dataBaseHandler.get_meeting_list(status);
+            setdata();
+
+        }else if(status.equalsIgnoreCase("completed")){
+
+            dataBaseHandler.get_meeting_list(status);
+            setdata();
+
+
+        }
     }
 }
