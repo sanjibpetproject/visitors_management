@@ -220,7 +220,6 @@
                         android:layout_marginRight="30dp"
                         android:layout_toRightOf="@+id/emp_icon"
                         android:background="@null"
-                        android:hint="Select Employee"
                         android:textColorHint="#b6c6e4"
                         android:textCursorDrawable="@null"
                         android:hint="Whom you want tom meet ?"

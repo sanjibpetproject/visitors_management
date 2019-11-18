@@ -73,12 +73,12 @@ public class VisitorDetails extends AppCompatActivity {
                 startActivityForResult(intent,2);
             }
         });
-        emp_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                emp_name.showDropDown();
-            }
-        });
+//        emp_name.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                emp_name.showDropDown();
+//            }
+//        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
