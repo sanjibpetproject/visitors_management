@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 public class DataBaseHandler extends SQLiteOpenHelper {
     public static String DATABASE_NAME = "my_db";
     public static String Register_table = "register_table";
-    public static String Appointment_table = "appointment_table";
     public static String Visitor_table = "visitor_table";
     public static SQLiteDatabase sqLiteDatabase;
     public DataBaseHandler(@Nullable Context context) {
@@ -36,14 +35,14 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("status", status);
-        db.update(Appointment_table, contentValues, "status" + " = ?" , new String[] { Integer.toString(id)} );
+        db.update(Visitor_table, contentValues, "status" + " = ?" , new String[] { Integer.toString(id)} );
         return true;
     }
 
     public void get_meeting_list(String status) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("SELECT * FROM " + Appointment_table + " WHERE status=?", new String[]{status});
+        Cursor res = db.rawQuery("SELECT * FROM " + Visitor_table + " WHERE status=?", new String[]{status});
 
         res.moveToFirst();
 
