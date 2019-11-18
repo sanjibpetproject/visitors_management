@@ -20,7 +20,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Register_table + "(_id integer primary key, Name text, Number text,Email text, Password text,Type text,status text,image text)");
-        sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Visitor_table + "(_id integer primary key, Name text, Number text,Email text, Password text,Employee_name text,Reason TEXT,status text,image text,InTime text,OutTime text)");
+        sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Visitor_table + "(_id integer primary key, Name text, Number text,Email text,Employee_name text,Reason TEXT,status text,image text,InTime text,OutTime text)");
 
     }
 
