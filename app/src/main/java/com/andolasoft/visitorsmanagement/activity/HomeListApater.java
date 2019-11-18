@@ -63,7 +63,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
         MyOptionsPickerView threePicker = new MyOptionsPickerView(context);
         final ArrayList<String> threeItemsOptions1 = new ArrayList<String>();
 
-        for(int i=0;i<=12;i++){
+        for(int i=1;i<=12;i++){
 
             if(i<10){
                 threeItemsOptions1.add("0"+Integer.toString(i));
