@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,17 +23,23 @@ public class BaseActivity extends AppCompatActivity {
     TextView text_pending,text_progress,text_completed;
     View view_progress,view_pending,view_completed;
     DataBaseHandler dataBaseHandler;
-    ImageView create_meeting;
+    ImageView create_meeting,pro_img;
+    TextView pro_name;
     ArrayList adapter_list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        dataBaseHandler = new DataBaseHandler(this);
+        dataBaseHandler.getWritableDatabase();
+        DataBaseHandler.sqLiteDatabase = BaseActivity.this.openOrCreateDatabase(DataBaseHandler.DATABASE_NAME,MODE_PRIVATE,null);
 
         init();
         click_function();
+        getprofile_data();
         text_pending.performClick();
+
 
     }
 
@@ -44,6 +53,8 @@ public class BaseActivity extends AppCompatActivity {
         view_progress = findViewById(R.id.view_progress);
         view_completed = findViewById(R.id.view_completed);
         create_meeting = findViewById(R.id.create_meeting);
+        pro_img = findViewById(R.id.image);
+        pro_name = findViewById(R.id.pro_name);
     }
 
     private void click_function(){
@@ -121,6 +132,17 @@ public class BaseActivity extends AppCompatActivity {
             setdata(CommonUtilties.Completed);
 
 
+        }
+    }
+    public void getprofile_data(){
+        Cursor cursor = DataBaseHandler.sqLiteDatabase.rawQuery(" SELECT * FROM " + DataBaseHandler.Register_table, null);
+        if (cursor.getCount()>0){
+            cursor.moveToFirst();
+            String name = cursor.getString(1);
+            String img_path = cursor.getString(7);
+            pro_name.setText(name);
+            Bitmap bitmap = BitmapFactory.decodeFile(img_path);
+            pro_img.setImageBitmap(bitmap);
         }
     }
 }

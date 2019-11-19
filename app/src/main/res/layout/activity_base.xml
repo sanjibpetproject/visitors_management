@@ -32,6 +32,7 @@
                 android:layout_toRightOf="@+id/image"
                 android:textColor="@color/white"
                 android:layout_marginLeft="15dp"
+                android:id="@+id/pro_name"
                 android:textSize="20dp">
 
             </TextView>

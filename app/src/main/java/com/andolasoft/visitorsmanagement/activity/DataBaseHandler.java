@@ -33,11 +33,16 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean update_meeting_list(int id,String status) {
+    public boolean update_meeting_list(int id,String status,String time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("status", status);
-        db.update(Visitor_table, contentValues, "id" + " = ?" , new String[] { Integer.toString(id)} );
+        //db.update(Visitor_table, contentValues, "_id" + " = ?" , new String[] { Integer.toString(id)} );
+        if (status.equals(CommonUtilties.InProgress)){
+            DataBaseHandler.sqLiteDatabase.execSQL(" UPDATE " + DataBaseHandler.Visitor_table + " SET status = '" + status + "' ,InTime = '" + time + "' WHERE _id = '" + id + "'");
+        }if (status.equals(CommonUtilties.Completed)){
+            DataBaseHandler.sqLiteDatabase.execSQL(" UPDATE " + DataBaseHandler.Visitor_table + " SET status = '" + status + "' ,OutTime = '" + time + "' WHERE _id = '" + id + "'");
+        }
         return true;
     }
 

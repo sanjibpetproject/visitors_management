@@ -155,7 +155,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
 
                     if(dataBaseHandler!=null){
                         SelectedMenuModel selectedMenuModel = (SelectedMenuModel) arrayList.get(j);
-                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.InProgress);
+                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.InProgress,hour+":"+minute+" "+ampm);
 
                         arrayList.remove(j);
                         notifyDataSetChanged();
@@ -165,7 +165,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
 
                     if(dataBaseHandler!=null){
                         SelectedMenuModel selectedMenuModel = (SelectedMenuModel) arrayList.get(j);
-                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.Completed);
+                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.Completed,hour+":"+minute+" "+ampm);
 
                         arrayList.remove(j);
                         notifyDataSetChanged();
