@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.andolasoft.visitorsmanagement.R;
 
+import java.util.ArrayList;
+
 public class BaseActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -19,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     View view_progress,view_pending,view_completed;
     DataBaseHandler dataBaseHandler;
     ImageView create_meeting;
+    ArrayList adapter_list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +53,14 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 setbar(text_progress,view_progress);
-                getdata("progress");
+                getdata(CommonUtilties.InProgress);
             }
         });
         text_pending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setbar(text_pending,view_pending);
-                getdata("pending");
+                getdata(CommonUtilties.Pending);
 
             }
         });
@@ -65,7 +68,7 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setbar(text_completed,view_completed);
-                getdata("completed");
+                getdata(CommonUtilties.Completed);
 
             }
         });
@@ -83,7 +86,7 @@ public class BaseActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        HomeListApater adapter = new HomeListApater(BaseActivity.this);
+        HomeListApater adapter = new HomeListApater(BaseActivity.this,adapter_list);
         recyclerView.setAdapter(adapter);
     }
 
@@ -103,18 +106,18 @@ public class BaseActivity extends AppCompatActivity {
 
     private void getdata(String status){
 
-        if(status.equalsIgnoreCase("progess")){
+        if(status.equalsIgnoreCase(CommonUtilties.InProgress)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
-        }else if(status.equalsIgnoreCase("pending")){
+        }else if(status.equalsIgnoreCase(CommonUtilties.Pending)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
 
-        }else if(status.equalsIgnoreCase("completed")){
+        }else if(status.equalsIgnoreCase(CommonUtilties.Completed)){
 
-            dataBaseHandler.get_meeting_list(status);
+            adapter_list = dataBaseHandler.get_meeting_list(status);
             setdata();
 
 

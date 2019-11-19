@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DataBaseHandler extends SQLiteOpenHelper {
     public static String DATABASE_NAME = "my_db";
     public static String Register_table = "register_table";
@@ -20,7 +22,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Register_table + "(_id integer primary key, Name text, Number text,Email text, Password text,Type text,status text,image text)");
-        sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Visitor_table + "(_id integer primary key, Name text, Number text,Email text, Password text,Employee_name text,Reason TEXT,status text,image text,InTime text,OutTime text)");
+        sqLiteDatabase.execSQL(" CREATE TABLE IF NOT EXISTS " + Visitor_table + "(_id integer primary key, Name text, Number text,Email text,Employee_name text,Reason TEXT,status text,image text,InTime text,OutTime text)");
 
     }
 
@@ -39,7 +41,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public void get_meeting_list(String status) {
+    public ArrayList get_meeting_list(String status) {
+        ArrayList arrayList1 = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("SELECT * FROM " + Visitor_table + " WHERE status=?", new String[]{status});
@@ -48,18 +51,21 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         while(res.isAfterLast() == false){
 
-            /*SelectedMenuModel selectedMenuModel = new SelectedMenuModel();
-            selectedMenuModel.setMenuId(res.getInt(0));
-            selectedMenuModel.setTimestamp(res.getLong(1));
-            selectedMenuModel.setMenuname(res.getString(2));
-            selectedMenuModel.setMenu_item(res.getString(3));
-            selectedMenuModel.setRate_per_menu(res.getInt(5));
-            selectedMenuModel.setNumber_of_menu(res.getInt(4));
-            selectedMenuModel.setDate(res.getString(6));
-
-            array_list.add(selectedMenuModel);*/
+            SelectedMenuModel selectedMenuModel = new SelectedMenuModel();
+            selectedMenuModel.setId(res.getInt(0));
+            selectedMenuModel.setName(res.getString(1));
+            selectedMenuModel.setNumber(res.getString(2));
+            selectedMenuModel.setEmployee_name(res.getString(4));
+            selectedMenuModel.setIn_time(res.getString(8));
+            selectedMenuModel.setOut_time(res.getString(9));
+            selectedMenuModel.setReason(res.getString(5));
+            selectedMenuModel.setEmail(res.getString(3));
+            selectedMenuModel.setStatus(res.getString(6));
+            selectedMenuModel.setImage_path(res.getString(7));
+            arrayList1.add(selectedMenuModel);
 
             res.moveToNext();
         }
+        return arrayList1;
     }
 }

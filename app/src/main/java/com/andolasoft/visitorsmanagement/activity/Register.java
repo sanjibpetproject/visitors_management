@@ -34,6 +34,8 @@ public class Register extends AppCompatActivity {
     Button register;
     DataBaseHandler dataBaseHandler;
     String name_val = "",number_val="",email_val="",password_val="";
+    CommonUtilties commonUtilties = new CommonUtilties();
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,8 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 boolean val = validation();
                 if (!val){
-                   Insert_into_db();
+                    String image_path = commonUtilties.photo_store_in_local(bitmap,name.getText().toString()+"-"+System.currentTimeMillis());
+                   Insert_into_db(image_path);
                    Intent intent = new Intent(Register.this,LoginActivity.class);
                    startActivity(intent);
                 }
@@ -75,15 +78,24 @@ public class Register extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+             bitmap = (Bitmap) data.getExtras().get("data");
             logo.setImageBitmap(bitmap);
         }
     }
     public void permission(){
         ArrayList<String> arrayList = new ArrayList<>();
         int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
         if (camera!= PackageManager.PERMISSION_GRANTED){
             arrayList.add(Manifest.permission.CAMERA);
+        }
+        if (write!= PackageManager.PERMISSION_GRANTED){
+            arrayList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (read!= PackageManager.PERMISSION_GRANTED){
+            arrayList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
         if (arrayList.size()!=0){
             ActivityCompat.requestPermissions(this,arrayList.toArray(new String[arrayList.size()]),10);
@@ -91,7 +103,7 @@ public class Register extends AppCompatActivity {
     }
     public boolean validation(){
         boolean val = false;
-        if (!name.getText().toString().trim().equals("") && !number.getText().toString().trim().equals("") && !email.getText().toString().trim().equals("") && !password.getText().toString().trim().equals("") && (employee.isChecked() || security.isChecked())){
+        if (!name.getText().toString().trim().equals("") && !number.getText().toString().trim().equals("") && !email.getText().toString().trim().equals("") && !password.getText().toString().trim().equals("") && (employee.isChecked() || security.isChecked()) && bitmap!=null){
             val = false;
         }else {
             if (name.getText().toString().trim().equals("")){
@@ -109,22 +121,25 @@ public class Register extends AppCompatActivity {
             }if (employee.isChecked() && security.isChecked()){
                 val = true;
             }
+            if (bitmap==null){
+                Toast.makeText(this, "Profile picture must be Required", Toast.LENGTH_SHORT).show();
+            }
         }
         return val;
     }
-    public void Insert_into_db(){
+    public void Insert_into_db(String image_path){
         ContentValues contentValues = new ContentValues();
         contentValues.put("Name",name.getText().toString());
         contentValues.put("Number",number.getText().toString());
         contentValues.put("Email",email.getText().toString());
         contentValues.put("Password",password.getText().toString());
         if (employee.isChecked()){
-            contentValues.put("Type","Employee");
+            contentValues.put("Type",CommonUtilties.Employeee);
         }else {
-            contentValues.put("Type","Security");
+            contentValues.put("Type",CommonUtilties.Security);
         }
        contentValues.put("status","");
-        contentValues.put("image","");
+        contentValues.put("image",image_path);
         long l = DataBaseHandler.sqLiteDatabase.insert(DataBaseHandler.Register_table, null, contentValues);
     }
 }

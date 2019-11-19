@@ -73,7 +73,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
 
             android:layout_width="match_parent"
-            android:layout_height="650dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/frame"
             android:visibility="visible">
 
@@ -81,7 +81,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/signin_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="650dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -148,7 +148,7 @@
                         android:layout_marginRight="30dp"
                         android:layout_toRightOf="@+id/user_email_icon"
                         android:background="@null"
-                        android:hint="Phone NUmber"
+                        android:hint="Phone Number"
                         android:inputType="number"
                         android:maxLength="10"
                         android:textColorHint="#b6c6e4"
