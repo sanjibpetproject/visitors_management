@@ -25,10 +25,14 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
 
     Context context;
     ArrayList arrayList;
-    public HomeListApater(Context context,ArrayList arrayList) {
+    String status;
+    DataBaseHandler dataBaseHandler;
+    public HomeListApater(Context context,ArrayList arrayList,String status) {
 
         this.context = context;
         this.arrayList = arrayList;
+        this.status = status;
+        dataBaseHandler = new DataBaseHandler(context);
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -38,7 +42,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
         SelectedMenuModel selectedMenuModel = (SelectedMenuModel) arrayList.get(i);
         viewHolder.text_name.setText("Name : "+selectedMenuModel.getName());
@@ -62,11 +66,19 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
         try {
             Bitmap bitmap = BitmapFactory.decodeFile(selectedMenuModel.getImage_path());
             viewHolder.prof_pic.setImageBitmap(bitmap);
-        }catch (Exception e){e.printStackTrace();}
+        }catch (Exception e){e.printStackTrace();
+        }
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_pisker();
+
+                if (status.equalsIgnoreCase(CommonUtilties.Pending)) {
+                    show_pisker("Enter In Time : ",status,i);
+
+                }else if(status.equalsIgnoreCase(CommonUtilties.InProgress)){
+                    show_pisker("Enter Out Time : ",status,i);
+                }
+
             }
         });
     }
@@ -96,7 +108,7 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
 
     }
 
-    private void show_pisker(){
+    private void show_pisker(String title, final String status,final int j){
 
         MyOptionsPickerView threePicker = new MyOptionsPickerView(context);
         final ArrayList<String> threeItemsOptions1 = new ArrayList<String>();
@@ -128,13 +140,38 @@ public class HomeListApater extends RecyclerView.Adapter<HomeListApater.ViewHold
 
 
         threePicker.setPicker(threeItemsOptions1, threeItemsOptions2, threeItemsOptions3, false);
-        threePicker.setTitle("Enter In Time : ");
+        threePicker.setTitle(title);
         threePicker.setCyclic(false, false, false);
         threePicker.setSelectOptions(0, 0, 0);
         threePicker.setOnoptionsSelectListener(new MyOptionsPickerView.OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
 
+                String hour = threeItemsOptions1.get(options1);
+                String minute = threeItemsOptions2.get(option2);
+                String ampm = threeItemsOptions3.get(options3);
+
+                if(status.equalsIgnoreCase(CommonUtilties.Pending)){
+
+                    if(dataBaseHandler!=null){
+                        SelectedMenuModel selectedMenuModel = (SelectedMenuModel) arrayList.get(j);
+                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.InProgress);
+
+                        arrayList.remove(j);
+                        notifyDataSetChanged();
+                    }
+
+                }else if(status.equalsIgnoreCase(CommonUtilties.InProgress)){
+
+                    if(dataBaseHandler!=null){
+                        SelectedMenuModel selectedMenuModel = (SelectedMenuModel) arrayList.get(j);
+                        dataBaseHandler.update_meeting_list(selectedMenuModel.getId(),CommonUtilties.Completed);
+
+                        arrayList.remove(j);
+                        notifyDataSetChanged();
+                    }
+
+                }
             }
         });
         threePicker.show();

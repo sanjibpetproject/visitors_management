@@ -81,12 +81,12 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
-    private void setdata(){
+    private void setdata(String status){
         recyclerView = findViewById(R.id.recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        HomeListApater adapter = new HomeListApater(BaseActivity.this,adapter_list);
+        HomeListApater adapter = new HomeListApater(BaseActivity.this,adapter_list,status);
         recyclerView.setAdapter(adapter);
     }
 
@@ -109,16 +109,16 @@ public class BaseActivity extends AppCompatActivity {
         if(status.equalsIgnoreCase(CommonUtilties.InProgress)){
 
             adapter_list = dataBaseHandler.get_meeting_list(status);
-            setdata();
+            setdata(CommonUtilties.InProgress);
         }else if(status.equalsIgnoreCase(CommonUtilties.Pending)){
 
             adapter_list = dataBaseHandler.get_meeting_list(status);
-            setdata();
+            setdata(CommonUtilties.Pending);
 
         }else if(status.equalsIgnoreCase(CommonUtilties.Completed)){
 
             adapter_list = dataBaseHandler.get_meeting_list(status);
-            setdata();
+            setdata(CommonUtilties.Completed);
 
 
         }

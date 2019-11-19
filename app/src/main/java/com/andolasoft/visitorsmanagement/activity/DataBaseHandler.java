@@ -37,7 +37,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("status", status);
-        db.update(Visitor_table, contentValues, "status" + " = ?" , new String[] { Integer.toString(id)} );
+        db.update(Visitor_table, contentValues, "id" + " = ?" , new String[] { Integer.toString(id)} );
         return true;
     }
 
