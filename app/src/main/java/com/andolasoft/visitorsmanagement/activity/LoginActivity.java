@@ -1,5 +1,6 @@
 package com.andolasoft.visitorsmanagement.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +17,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.andolasoft.visitorsmanagement.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,12 +31,14 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox password_checkbox;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         dataBaseHandler = new DataBaseHandler(this);
         dataBaseHandler.getWritableDatabase();
+        mAuth = FirebaseAuth.getInstance();
         DataBaseHandler.sqLiteDatabase = LoginActivity.this.openOrCreateDatabase(DataBaseHandler.DATABASE_NAME,MODE_PRIVATE,null);
         user_email = (EditText)findViewById(R.id.user_email);
         user_password = (EditText)findViewById(R.id.user_password);
@@ -43,11 +52,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (validation()){
-                    editor.putBoolean("is_login",true);
-                    editor.commit();
-                    Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
-                    startActivity(intent);
-                    finish();
+
+
+                    login(user_email.getText().toString(),user_password.getText().toString());
+
                 }else {
                     Toast.makeText(LoginActivity.this, "Incorrect email and password", Toast.LENGTH_SHORT).show();
                 }
@@ -82,5 +90,31 @@ public class LoginActivity extends AppCompatActivity {
             val = false;
         }
         return val;
+    }
+
+    private void login(String email,String password){
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            editor.putBoolean("is_login",true);
+                            editor.commit();
+                            Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                });
     }
 }

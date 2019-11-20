@@ -15,6 +15,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public static String Register_table = "register_table";
     public static String Visitor_table = "visitor_table";
     public static SQLiteDatabase sqLiteDatabase;
+
     public DataBaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
