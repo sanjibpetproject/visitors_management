@@ -5,6 +5,7 @@ public class User {
     String name;
     String devicetoken;
 
+
     public String getName() {
         return name;
     }

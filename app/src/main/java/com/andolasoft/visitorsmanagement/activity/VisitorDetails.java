@@ -21,6 +21,10 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.andolasoft.visitorsmanagement.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -38,6 +42,11 @@ public class VisitorDetails extends AppCompatActivity {
     ArrayList emp_name_list = new ArrayList();
     CommonUtilties commonUtilties = new CommonUtilties();
     Bitmap bitmap;
+    ArrayList<User> arrayList;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,5 +171,26 @@ public class VisitorDetails extends AppCompatActivity {
              bitmap = (Bitmap) data.getExtras().get("data");
             logo.setImageBitmap(bitmap);
         }
+    }
+
+
+    private void getData(){
+
+        arrayList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("Users")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            User user = snapshot.getValue(User.class);
+
+                            arrayList.add(user);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
     }
 }
