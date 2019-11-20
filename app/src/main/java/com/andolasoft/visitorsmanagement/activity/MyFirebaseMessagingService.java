@@ -105,7 +105,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder = new
                 NotificationCompat.Builder(this)
                 //.setSmallIcon(R.drawable.bookbus_appicon)
-                .setSmallIcon(R.mipmap.ic_launcher, 100)
+                .setSmallIcon(R.mipmap.app_icon, 100)
                 .setLargeIcon(largeIcon)
                 .setAutoCancel(true)
                 .setContentTitle(APP_PUSH_NOTIFICATION_TITLE)
