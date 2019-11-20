@@ -28,11 +28,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Sanjib kumar"
+                android:text=""
                 android:layout_toRightOf="@+id/image"
                 android:textColor="@color/white"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/pro_name"
+                android:id="@+id/name"
                 android:textSize="20dp">
 
             </TextView>

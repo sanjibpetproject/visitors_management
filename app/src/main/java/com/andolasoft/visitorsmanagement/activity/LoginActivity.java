@@ -3,6 +3,7 @@ package com.andolasoft.visitorsmanagement.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.InputType;
@@ -21,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     DataBaseHandler dataBaseHandler;
     EditText user_email,user_password;
     CheckBox password_checkbox;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +36,15 @@ public class LoginActivity extends AppCompatActivity {
         signin_button = findViewById(R.id.signin_button);
         signup = (Button)findViewById(R.id.signup);
         password_checkbox = (CheckBox)findViewById(R.id.password_checkbox);
+        sharedPreferences = getSharedPreferences("VM_db",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         signin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (true){
+                if (validation()){
+                    editor.putBoolean("is_login",true);
+                    editor.commit();
                     Intent intent = new Intent(LoginActivity.this, BaseActivity.class);
                     startActivity(intent);
                     finish();

@@ -1,10 +1,13 @@
 package com.andolasoft.visitorsmanagement.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,14 +15,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.andolasoft.visitorsmanagement.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 
@@ -36,6 +49,8 @@ public class Register extends AppCompatActivity {
     String name_val = "",number_val="",email_val="",password_val="";
     CommonUtilties commonUtilties = new CommonUtilties();
     Bitmap bitmap;
+    private FirebaseAuth mAuth;
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +64,8 @@ public class Register extends AppCompatActivity {
         employee = (RadioButton) findViewById(R.id.emp);
         security = (RadioButton) findViewById(R.id.sec);
         register = (Button)findViewById(R.id.signin_button);
+        dialog = new ProgressDialog(Register.this);
+        mAuth = FirebaseAuth.getInstance();
         permission();
          dataBaseHandler = new DataBaseHandler(this);
         dataBaseHandler.getWritableDatabase();
@@ -65,10 +82,10 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 boolean val = validation();
                 if (!val){
-                    String image_path = commonUtilties.photo_store_in_local(bitmap,name.getText().toString()+"-"+System.currentTimeMillis());
-                   Insert_into_db(image_path);
-                   Intent intent = new Intent(Register.this,LoginActivity.class);
-                   startActivity(intent);
+
+                    dialog.show();
+                    create_acc_firebase(email.getText().toString(),password.getText().toString());
+
                 }
             }
         });
@@ -122,6 +139,7 @@ public class Register extends AppCompatActivity {
                 val = true;
             }
             if (bitmap==null){
+                val = true;
                 Toast.makeText(this, "Profile picture must be Required", Toast.LENGTH_SHORT).show();
             }
         }
@@ -141,5 +159,58 @@ public class Register extends AppCompatActivity {
        contentValues.put("status","");
         contentValues.put("image",image_path);
         long l = DataBaseHandler.sqLiteDatabase.insert(DataBaseHandler.Register_table, null, contentValues);
+    }
+
+    private void create_acc_firebase(String email,String password){
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            writedata_to_firebase();
+
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(Register.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+    }
+
+
+    private void writedata_to_firebase(){
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+
+                        String token = task.getResult().getToken();
+                        User user = new User();
+                        user.setName(name.getText().toString());
+                        user.setDevicetoken(token);
+
+                        FirebaseDatabase.getInstance().getReference().child("Users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                dialog.dismiss();
+                                String image_path = commonUtilties.photo_store_in_local(bitmap,name.getText().toString()+"-"+System.currentTimeMillis());
+                                Insert_into_db(image_path);
+                                Intent intent = new Intent(Register.this,LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                });
+
     }
 }

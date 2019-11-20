@@ -54,7 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         view_completed = findViewById(R.id.view_completed);
         create_meeting = findViewById(R.id.create_meeting);
         pro_img = findViewById(R.id.image);
-        pro_name = findViewById(R.id.pro_name);
+        pro_name = findViewById(R.id.name);
     }
 
     private void click_function(){
