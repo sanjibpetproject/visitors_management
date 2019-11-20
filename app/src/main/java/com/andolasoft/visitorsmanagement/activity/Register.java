@@ -51,6 +51,8 @@ public class Register extends AppCompatActivity {
     Bitmap bitmap;
     private FirebaseAuth mAuth;
     ProgressDialog dialog;
+    String emailPattern  = "^[A-Za-z0-9,!#\\$%&'\\*\\+/=\\?\\^_`\\{\\|}~-]+(\\.[A-Za-z0-9,!#\\$%&'\\*\\+/=\\?\\^_`\\{\\|}~-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.([A-Za-z]{2,})$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,14 @@ public class Register extends AppCompatActivity {
         boolean val = false;
         if (!name.getText().toString().trim().equals("") && !number.getText().toString().trim().equals("") && !email.getText().toString().trim().equals("") && !password.getText().toString().trim().equals("") && (employee.isChecked() || security.isChecked()) && bitmap!=null){
             val = false;
+            if (number.getText().toString().trim().length()!=10){
+                val = true;
+                email.setError("please enter 10 digit number");
+            }
+            if (!email.getText().toString().matches(emailPattern)){
+                val = true;
+                email.setError("Enter valid Email");
+            }
         }else {
             if (name.getText().toString().trim().equals("")){
                 name.setError("Enter Name");

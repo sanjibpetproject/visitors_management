@@ -186,6 +186,7 @@
                         android:layout_toRightOf="@+id/mail_icon"
                         android:background="@null"
                         android:hint="Email"
+                        android:inputType="textEmailAddress"
                         android:textColorHint="#b6c6e4"
                         android:textCursorDrawable="@null"
                         android:textSize="16sp" />
