@@ -3,9 +3,9 @@
     package="com.andolasoft.visitorsmanagement">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -14,10 +14,9 @@
         android:roundIcon="@mipmap/main_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.VisitorDetails">
-
-        </activity>
-        <activity android:name=".activity.Register"></activity>
+        <activity android:name=".activity.UserDetailsPopup"></activity>
+        <activity android:name=".activity.VisitorDetails"></activity>
+        <activity android:name=".activity.Register" />
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.LuncherActivity">
@@ -27,18 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".activity.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!--<service
-            android:name=".java.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>-->
     </application>
 
 </manifest>

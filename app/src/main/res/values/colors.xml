@@ -37,4 +37,5 @@
     <color name="background">#8757BB</color>
     <color name="text_color">#B1BCBE</color>
     <color name="text_grey">#d3d3d3</color>
+    <color name="actionbar">#3C3B40</color>
 </resources>

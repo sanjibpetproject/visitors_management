@@ -117,6 +117,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 getSystemService(Context.NOTIFICATION_SERVICE);
         //Create Push Notification
         notificationManager.notify(0, notificationBuilder.build());
+
+        Intent intent1 = new Intent(MyFirebaseMessagingService.this,UserDetailsPopup.class);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent1);
     }
 
     private void sendLinkNotification(String messageBody, String messageTitle,String note_link) {
